@@ -13,6 +13,7 @@ class PostController extends Controller
         return view('posts.index')->with(['posts' => $post->getPaginateBylimit(5)]);
         
     }
+
     public function show(Post $post)
     {
     return view('posts.show')->with(['post' => $post]);
@@ -29,6 +30,7 @@ class PostController extends Controller
       $post->fill($input)->save();
       return redirect('/posts/' . $post->id);
     }
+
      public function edit(Post $post)
     {
         return view('posts/edit')->with(['post' => $post]);
@@ -39,5 +41,6 @@ class PostController extends Controller
         $post->fill($input_post)->save();
         return redirect('/posts/' . $post->id);
     }
+
     
 }
