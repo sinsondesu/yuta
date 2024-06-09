@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <x-app-layout>
+    <x-slot name="header">
     <head>
         <meta charset="utf-8">
         <title>Blog</title>
@@ -7,9 +9,8 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-        
     </head>
+    </x-slot>
     <body class="antialiased">
         <h1>Blog Name</h1>
         <a href="/posts/create">create</a>
@@ -17,6 +18,7 @@
             @foreach($posts as $post)
             <div class='post'>
                <a href="/posts/{{ $post->id }}"><h2 class='title'>{{ $post->title }}</h2></a>
+               <a href="">{{ $post->category->name }}</a>
                 <p class='body'>{{ $post->body }}</p>
                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                 @csrf
@@ -36,5 +38,16 @@
                 }
             }
         </script>
+         <div>
+        @foreach($questions as $question)
+            <div>
+                <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                    {{ $question['title'] }}
+                </a>
+            </div>
+        @endforeach
+    </div>
     </body>
+  {{ Auth::user()->name }}
+    </x-app-layout>
 </html>
